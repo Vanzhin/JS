@@ -11,3 +11,5 @@ alert (admin);
 <!-- задание 3 -->
 admin = 1000 + "108";
 alert (admin);
+
+
