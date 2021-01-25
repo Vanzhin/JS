@@ -1,3 +1,4 @@
+"use strict";
 //<!-- задание 1 -->
 //let Tc = 20;
 //let Tf = ((9 / 5) * Tc + 32);
@@ -11,7 +12,7 @@
 //<!-- задание 3 -->
 //admin = 1000 + "108";
 //alert (admin);
-"use strict"
+
 <!-- HomeWork 2 -->
 <!-- ex1 -->
 alert("Задание 1, 2 - см. комментраний script.js");
