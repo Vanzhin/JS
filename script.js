@@ -251,7 +251,7 @@ alert(`Итоговая сумма: ${totalPrice}`);
 
 for (let i = 0; i < 10; alert(i++)) {
 
-    // }
+}
     // < !--ex4 -->
     let star = "*";
     for (let i = 0; i < 20; i++) {
