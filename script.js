@@ -208,53 +208,81 @@
 // < !--HomeWork 3 -- >
 // < !--ex1 -->
 
-let digit = 100;
-let digits = [];
-let i = 2;
+// let digit = 100;
+// let digits = [];
+// let i = 2;
 
-nextPrime:
-while (i < digit) {
-    i++;
-    let j = 2;
-    while (j < i) {
-        if (i % j == 0) { continue nextPrime; }
-        j++
-    }
+// nextPrime:
+// while (i < digit) {
+//     i++;
+//     let j = 2;
+//     while (j < i) {
+//         if (i % j == 0) { continue nextPrime; }
+//         j++
+//     }
 
-    digits.push(i);
-}
-alert(`Простые числа от 0 до ${digit}: ${digits}`);
+//     digits.push(i);
+// }
+// alert(`Простые числа от 0 до ${digit}: ${digits}`);
 
-// < !--ex2 -->
+// // < !--ex2 -->
 
-let cart = [
-    { art: 1, itemName: "T-shirt", brandName: "Mango", price: 150, quantity: 2 },
-    { art: 2, itemName: "T-shirt", brandName: "Mango", price: 100, quantity: 2 },
-    { art: 3, itemName: "T-shirt", brandName: "Mango", price: 75, quantity: 2 },
-    { art: 4, itemName: "T-shirt", brandName: "Mango", price: 50, quantity: 2 },
-    { art: 5, itemName: "T-shirt", brandName: "Mango", price: 50, quantity: 2 }
+// let cart = [
+//     { art: 1, itemName: "T-shirt", brandName: "Mango", price: 150, quantity: 2 },
+//     { art: 2, itemName: "T-shirt", brandName: "Mango", price: 100, quantity: 2 },
+//     { art: 3, itemName: "T-shirt", brandName: "Mango", price: 75, quantity: 2 },
+//     { art: 4, itemName: "T-shirt", brandName: "Mango", price: 50, quantity: 2 },
+//     { art: 5, itemName: "T-shirt", brandName: "Mango", price: 50, quantity: 2 }
 
+// ];
+// function countBasketPrice(n) {
+//     let currentTotalPrice = 0;
+//     n = cart.length;
+//     for (let i = 0; i <= cart.length - 1; i++) {
+//         let itemPrice = cart[i].price * cart[i].quantity;
+//         currentTotalPrice += itemPrice;
+//     }
+//     return currentTotalPrice;
+// }
+// let totalPrice = countBasketPrice(cart.length);
+// alert(`Итоговая сумма: ${totalPrice}`);
+
+// // < !--ex3 -->
+
+// for (let i = 0; i < 10; alert(i++)) {
+
+// }
+//     // < !--ex4 -->
+//     let star = "*";
+//     for (let i = 0; i < 20; i++) {
+//         console.log(star);
+//         star += "*";
+//     }
+
+// test
+
+const numbers = [1, 2, 3];
+const doubles = numbers.map(function (num) {
+    return num * num;
+});
+console.log(doubles);
+
+var items = [
+    { name: 'Edward', value: 21 },
+    { name: 'Sharpe', value: 37 },
+    { name: 'And', value: 45 },
+    { name: 'The', value: -12 },
+    { name: 'Magnetic' },
+    { name: 'Zeros', value: 37 }
 ];
-function countBasketPrice(n) {
-    let currentTotalPrice = 0;
-    n = cart.length;
-    for (let i = 0; i <= cart.length - 1; i++) {
-        let itemPrice = cart[i].price * cart[i].quantity;
-        currentTotalPrice += itemPrice;
+items.sort(function (a, b) {
+    if (a.name > b.name) {
+        return 1;
     }
-    return currentTotalPrice;
-}
-let totalPrice = countBasketPrice(cart.length);
-alert(`Итоговая сумма: ${totalPrice}`);
-
-// < !--ex3 -->
-
-for (let i = 0; i < 10; alert(i++)) {
-
-}
-    // < !--ex4 -->
-    let star = "*";
-    for (let i = 0; i < 20; i++) {
-        console.log(star);
-        star += "*";
+    if (a.name < b.name) {
+        return -1;
     }
+    // a должно быть равным b
+    return 0;
+});
+console.log(items);
