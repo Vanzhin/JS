@@ -261,28 +261,80 @@
 
 // test
 
-const numbers = [1, 2, 3];
-const doubles = numbers.map(function (num) {
-    return num * num;
-});
-console.log(doubles);
+// const numbers = [1, 2, 3];
+// const doubles = numbers.map(function (num) {
+//     return num * num;
+// });
+// console.log(doubles);
 
-var items = [
-    { name: 'Edward', value: 21 },
-    { name: 'Sharpe', value: 37 },
-    { name: 'And', value: 45 },
-    { name: 'The', value: -12 },
-    { name: 'Magnetic' },
-    { name: 'Zeros', value: 37 }
+// var items = [
+//     { name: 'Edward', value: 21 },
+//     { name: 'Sharpe', value: 37 },
+//     { name: 'And', value: 45 },
+//     { name: 'The', value: -12 },
+//     { name: 'Magnetic' },
+//     { name: 'Zeros', value: 37 }
+// ];
+// items.sort(function (a, b) {
+//     if (a.name > b.name) {
+//         return 1;
+//     }
+//     if (a.name < b.name) {
+//         return -1;
+//     }
+//     // a должно быть равным b
+//     return 0;
+// });
+// console.log(items);
+
+
+// < !--HomeWork 4 -- >
+// < !--ex1 -->
+
+
+// let n = Math.floor((Math.random() * 2000), 0);
+// console.log(n);
+// function getObject(n) {
+//     if (n > 999) {
+//         console.log("число превышает 999");
+//         return {};
+//     }
+//     let hund = Math.floor((n / 100));
+//     let dec = Math.floor((n - hund * 100) / 10);
+//     let one = Math.floor(n - hund * 100 - dec * 10);
+//     const numbers = {
+//         единицы: one,
+//         десятки: dec,
+//         сотни: hund
+//     }
+//     return (numbers);
+
+
+// }
+// console.log(getObject(n));
+
+// < !--ex2 -->
+function Product(art, itemName, desc, price, brandName) {
+    this.art = art;
+    this.itemName = itemName;
+    this.desc = desc;
+    this.price = price;
+    this.brandName = brandName;
+};
+
+let additionalInfo = {
+    score: 5,
+
+};
+
+Product.prototype = additionalInfo;
+
+let products = [
+    new Product(1, `t - shirt`, `goods description1`, 100, `mango`),
+    new Product(2, `t - shirt`, `goods description2`, 120, `levis`),
+    new Product(3, `t - shirt`, `goods description3`, 130, `GJ`),
+    new Product(4, `t - shirt`, `goods description4`, 150, `adidas`),
+    new Product(5, `t - shirt`, `goods description5`, 200, `nike`),
 ];
-items.sort(function (a, b) {
-    if (a.name > b.name) {
-        return 1;
-    }
-    if (a.name < b.name) {
-        return -1;
-    }
-    // a должно быть равным b
-    return 0;
-});
-console.log(items);
+
+
