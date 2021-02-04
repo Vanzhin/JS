@@ -292,26 +292,26 @@
 // < !--ex1 -->
 
 
-// let n = Math.floor((Math.random() * 2000), 0);
-// console.log(n);
-// function getObject(n) {
-//     if (n > 999) {
-//         console.log("число превышает 999");
-//         return {};
-//     }
-//     let hund = Math.floor((n / 100));
-//     let dec = Math.floor((n - hund * 100) / 10);
-//     let one = Math.floor(n - hund * 100 - dec * 10);
-//     const numbers = {
-//         единицы: one,
-//         десятки: dec,
-//         сотни: hund
-//     }
-//     return (numbers);
+let n = Math.floor((Math.random() * 2000), 0);
+console.log(n);
+function getObject(n) {
+    if (n > 999) {
+        console.log("число превышает 999");
+        return {};
+    }
+    let hund = Math.floor((n / 100));
+    let dec = Math.floor((n - hund * 100) / 10);
+    let one = Math.floor(n - hund * 100 - dec * 10);
+    const numbers = {
+        единицы: one,
+        десятки: dec,
+        сотни: hund
+    }
+    return (numbers);
 
 
-// }
-// console.log(getObject(n));
+}
+console.log(getObject(n));
 
 // < !--ex2 -->
 function Product(art, itemName, desc, price, brandName) {
