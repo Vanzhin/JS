@@ -292,26 +292,26 @@
 // < !--ex1 -->
 
 
-// let n = Math.floor((Math.random() * 2000), 0);
-// console.log(n);
-// function getObject(n) {
-//     if (n > 999) {
-//         console.log("число превышает 999");
-//         return {};
-//     }
-//     let hund = Math.floor((n / 100));
-//     let dec = Math.floor((n - hund * 100) / 10);
-//     let one = Math.floor(n - hund * 100 - dec * 10);
-//     const numbers = {
-//         единицы: one,
-//         десятки: dec,
-//         сотни: hund
-//     }
-//     return (numbers);
+let n = Math.floor((Math.random() * 2000), 0);
+console.log(n);
+function getObject(n) {
+    if (n > 999) {
+        console.log("число превышает 999");
+        return {};
+    }
+    let hund = Math.floor((n / 100));
+    let dec = Math.floor((n - hund * 100) / 10);
+    let one = Math.floor(n - hund * 100 - dec * 10);
+    const numbers = {
+        единицы: one,
+        десятки: dec,
+        сотни: hund
+    }
+    return (numbers);
 
 
-// }
-// console.log(getObject(n));
+}
+console.log(getObject(n));
 
 // < !--ex2 -->
 function Product(art, itemName, desc, price, brandName) {
@@ -336,5 +336,60 @@ let products = [
     new Product(4, `t - shirt`, `goods description4`, 150, `adidas`),
     new Product(5, `t - shirt`, `goods description5`, 200, `nike`),
 ];
+console.log(products);
+
+function BasketItem(art, itemName, price, quantity) {
+    this.art = art;
+    this.itemName = itemName;
+    this.price = price;
+    this.quantity = quantity;
+    this.makeDiscount = function (discount) {
+        this.price = this.price * (100 - discount) / 100;
+    }
+
+}
+let basket = [
+    new BasketItem(products[0].art, products[0].itemName, products[0].price, 2),
+    new BasketItem(products[2].art, products[2].itemName, products[2].price, 3),
+    new BasketItem(products[3].art, products[3].itemName, products[3].price, 10)
+]
+for (let newPrice of basket) {
+    newPrice.makeDiscount(10);
+}
+function totalBasketPrice(basketArr) {
+    let currenttotalPrice = 0;
+    for (let i = 0; i <= basketArr.length - 1; i++) {
+        let totalPrice = basketArr[i].price * basketArr[i].quantity;
+        currenttotalPrice += totalPrice;
+
+    }
+    return currenttotalPrice;
+
+}
+console.log(basket)
+
+console.log(`стоимость корзины v1: ${totalBasketPrice(basket)}`);
+
+// еще вариант
+
+const basketV2 = {
+    item1: {
+        art: 1, itemName: `t-shirt`, desc: `description1`, price: 100, brandName: `mango`, quantity: 2
+    },
+    item2: {
+        art: 2, itemName: `t-shirt`, desc: `description2`, price: 150, brandName: `adidas`, quantity: 1
+    },
+    item3: {
+        art: 3, itemName: `t-shirt`, desc: `description3`, price: 200, brandName: `dior`, quantity: 3
+    },
+    totalBasketPrice() {
+        let p = this.item1.price * this.item1.quantity + this.item2.price * this.item2.quantity + this.item3.price * this.item3.quantity;
+        return p;
+    }
+}
+console.log(`стоимость корзины v2: ${basketV2.totalBasketPrice()}`);
+
+
+
 
 
