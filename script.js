@@ -30,9 +30,23 @@
 // //var x = 1 + (a *= 2); ответ 5. снасала производятся действвия в скобках, а =а*2, затем операция сложения = 1+2*2=5
 
 // < !--ex3 -->
-//     alert("Задание 3");
-// let a = 1,
-//     b = -2;
+// alert("Задание 3");
+// let a = prompt("укажите число");
+// while (true) {
+//     if (isNaN(a) || a === "") {
+//         alert("необходимо ввести число");
+//         a = prompt("укажите число");
+//     }
+//     else break;
+// }
+// let b = prompt("укажите второе число");
+// while (true) {
+//     if (isNaN(b) || b === "") {
+//         alert("необходимо ввести число");
+//         b = prompt("укажите второе число");
+//     }
+//     else break;
+// }
 // if (a >= 0 && b >= 0) {
 //     alert(a - b);
 // } else if (a < 0 && b < 0) {
@@ -98,39 +112,38 @@
 // }
 
 // < !--ex5-- >
-//     alert("Задание 5");
+// alert("Задание 5");
 // let d = parseInt(prompt("введите первое число"));
 // let f = parseInt(prompt("введите второе число"));
-// let e;
+
 
 // function summ(d, f) {
-//     e = d + f;
+//     let e = d + f;
 //     return e;
 // }
 
 // function subtraction(d, f) {
-//     e = d - f;
+//     let e = d - f;
 //     return e;
 // }
 
 // function multiply(d, f) {
-//     e = d * f;
+//     let e = d * f;
 //     return e;
 // }
 
 // function division(d, f) {
-//     e = d / f;
+//     let e = d / f;
 //     return e;
 // }
-// summ(d, f);
 
-// alert("сумма чисел равна " + e);
+// alert("сумма чисел равна " + summ(d, f));
 // subtraction(d, f);
-// alert("разность чисел равна " + e);
+// alert("разность чисел равна " + subtraction(d, f));
 // multiply(d, f);
-// alert("умножение чисел равно: " + e);
+// alert("умножение чисел равно: " + multiply(d, f));
 // division(d, f);
-// alert("деление первого на второе число: " + e);
+// alert("деление первого на второе число: " + division(d, f));
 
 // < !--ex6-- >
 //     alert("Задание 6");
@@ -160,7 +173,6 @@
 //             e = "что-то пошло не так";
 //     }
 
-
 // }
 // mathOperation(arg1, arg2, operation);
 // alert(e);
@@ -178,10 +190,9 @@
 //     alert("Задание 8");
 
 // function power(val, pow) {
-//     if (pow == 0) {
+//     if (pow === 0) {
 //         return current;
 //     }
-
 //     else if (n + 1 <= pow && pow > 0) {
 //         current *= val;
 //         n++;
@@ -194,16 +205,13 @@
 //         power(val, pow);
 //         return current;
 //     }
-
-
-
 // }
 // let val = parseInt(prompt("введите число"));
 // let pow = parseInt(prompt("введите степень возведения"));
 // let n = 0;
 // let current = 1;
 // power(val, pow);
-// alert("число " + val + " в степени " + pow + " равно " + current);
+// alert(`число ${val} в степени ${pow} равно ${current}`);
 
 // < !--HomeWork 3 -- >
 // < !--ex1 -->
@@ -292,28 +300,162 @@
 // < !--ex1 -->
 
 
-let n = Math.floor((Math.random() * 2000), 0);
-console.log(n);
-function getObject(n) {
-    if (n > 999) {
-        console.log("число превышает 999");
-        return {};
-    }
-    let hund = Math.floor((n / 100));
-    let dec = Math.floor((n - hund * 100) / 10);
-    let one = Math.floor(n - hund * 100 - dec * 10);
-    const numbers = {
-        единицы: one,
-        десятки: dec,
-        сотни: hund
-    }
-    return (numbers);
+// let n = Math.floor((Math.random() * 2000), 0);
+// console.log(n);
+// function getObject(n) {
+//     if (n > 999) {
+//         console.log("число превышает 999");
+//         return {};
+//     }
+//     let hund = Math.floor((n / 100));
+//     let dec = Math.floor((n - hund * 100) / 10);
+//     let one = Math.floor(n - hund * 100 - dec * 10);
+//     const numbers = {
+//         единицы: one,
+//         десятки: dec,
+//         сотни: hund
+//     }
+//     return (numbers);
 
 
+// }
+// console.log(getObject(n));
+
+// // < !--ex2 -->
+// function Product(art, itemName, desc, price, brandName) {
+//     this.art = art;
+//     this.itemName = itemName;
+//     this.desc = desc;
+//     this.price = price;
+//     this.brandName = brandName;
+// };
+
+// let additionalInfo = {
+//     score: 5,
+
+// };
+
+// Product.prototype = additionalInfo;
+
+// let products = [
+//     new Product(1, `t - shirt`, `goods description1`, 100, `mango`),
+//     new Product(2, `t - shirt`, `goods description2`, 120, `levis`),
+//     new Product(3, `t - shirt`, `goods description3`, 130, `GJ`),
+//     new Product(4, `t - shirt`, `goods description4`, 150, `adidas`),
+//     new Product(5, `t - shirt`, `goods description5`, 200, `nike`),
+// ];
+// console.log(products);
+
+// function BasketItem(art, itemName, price, quantity) {
+//     this.art = art;
+//     this.itemName = itemName;
+//     this.price = price;
+//     this.quantity = quantity;
+//     this.makeDiscount = function (discount) {
+//         this.price = this.price * (100 - discount) / 100;
+//     }
+
+// }
+// let basket = [
+//     new BasketItem(products[0].art, products[0].itemName, products[0].price, 2),
+//     new BasketItem(products[2].art, products[2].itemName, products[2].price, 3),
+//     new BasketItem(products[3].art, products[3].itemName, products[3].price, 10)
+// ]
+// for (let newPrice of basket) {
+//     newPrice.makeDiscount(10);
+// }
+// function totalBasketPrice(basketArr) {
+//     let currenttotalPrice = 0;
+//     for (let i = 0; i <= basketArr.length - 1; i++) {
+//         let totalPrice = basketArr[i].price * basketArr[i].quantity;
+//         currenttotalPrice += totalPrice;
+
+//     }
+//     return currenttotalPrice;
+
+// }
+// console.log(basket)
+
+// console.log(`стоимость корзины v1: ${totalBasketPrice(basket)}`);
+
+// // еще вариант
+
+// const basketV2 = {
+//     item1: {
+//         art: 1, itemName: `t-shirt`, desc: `description1`, price: 100, brandName: `mango`, quantity: 2
+//     },
+//     item2: {
+//         art: 2, itemName: `t-shirt`, desc: `description2`, price: 150, brandName: `adidas`, quantity: 1
+//     },
+//     item3: {
+//         art: 3, itemName: `t-shirt`, desc: `description3`, price: 200, brandName: `dior`, quantity: 3
+//     },
+//     totalBasketPrice() {
+//         let p = this.item1.price * this.item1.quantity + this.item2.price * this.item2.quantity + this.item3.price * this.item3.quantity;
+//         return p;
+//     }
+// }
+// console.log(`стоимость корзины v2: ${basketV2.totalBasketPrice()}`);
+
+
+
+// < !--HomeWork 5 -- >
+// < !--ex 5-1 -->
+
+function setChessTable() { //создаю тэг таблицы
+    let chessDiv = document.querySelector(".chess");
+    let table = document.createElement("table");
+    chessDiv.appendChild(table);
+    table.style.borderCollapse = "collapse";
+    table.style.marginTop = "10px";
+    let n = 1;
+    let arrL = ["", "A", "B", "C", "D", "E", "F", "G", "H", ""]; //массивы для букв и цифр
+    let arrInt = ["", "1", "2", "3", "4", "5", "6", "7", "8", ""];
+    // строю таблицу
+    while (n <= 10) {
+        let rowBW = document.createElement("tr");
+        table.appendChild(rowBW);
+        for (let i = 1; i <= 10; i++) {
+            let td = document.createElement("td");
+            rowBW.appendChild(td);
+            td.style.width = "30px";
+            td.style.height = "30px";
+            td.style.textAlign = "center";
+            // прописываю условия для стилей и наполнения разных клеток черным
+            if (n == 10) {
+                td.innerHTML = arrL[i - 1];
+                td.style.backgroundColor = "lightgray";
+                continue;
+            }
+            if (n == 1) {
+                td.innerHTML = arrL[10 - i];
+                td.style.transform = "rotate(180deg)";
+                td.style.backgroundColor = "lightgray";
+                continue;
+            }
+            if (n % 2 == 0 && i % 2 == 1) {
+                td.style.backgroundColor = "black";
+            }
+            if (n % 2 == 1 && i % 2 == 0) {
+                td.style.backgroundColor = "black";
+            }
+            if (n > 1 && n < 10, i == 1) {
+                td.innerHTML = arrInt[10 - n];
+                td.style.backgroundColor = "lightgray";
+            }
+            if (n > 1 && n < 10, i == 10) {
+                td.innerHTML = arrInt[n - 1];
+                td.style.backgroundColor = "white";
+                td.style.transform = "rotate(180deg)";
+                td.style.backgroundColor = "lightgray";
+            }
+        }
+        n++;
+    }
 }
-console.log(getObject(n));
+setChessTable();
 
-// < !--ex2 -->
+// < !--ex 5-2 -->
 function Product(art, itemName, desc, price, brandName) {
     this.art = art;
     this.itemName = itemName;
@@ -321,14 +463,6 @@ function Product(art, itemName, desc, price, brandName) {
     this.price = price;
     this.brandName = brandName;
 };
-
-let additionalInfo = {
-    score: 5,
-
-};
-
-Product.prototype = additionalInfo;
-
 let products = [
     new Product(1, `t - shirt`, `goods description1`, 100, `mango`),
     new Product(2, `t - shirt`, `goods description2`, 120, `levis`),
@@ -337,6 +471,7 @@ let products = [
     new Product(5, `t - shirt`, `goods description5`, 200, `nike`),
 ];
 console.log(products);
+let basket = []; //создаю пустой массив корзины
 
 function BasketItem(art, itemName, price, quantity) {
     this.art = art;
@@ -346,50 +481,78 @@ function BasketItem(art, itemName, price, quantity) {
     this.makeDiscount = function (discount) {
         this.price = this.price * (100 - discount) / 100;
     }
-
 }
-let basket = [
+
+let div = document.querySelector("div"); //ищется div и вставляется h2
+let basketAlert = document.createElement("h2");
+div.appendChild(basketAlert);
+basketReminder();
+
+basket = [ //создается корзина
     new BasketItem(products[0].art, products[0].itemName, products[0].price, 2),
     new BasketItem(products[2].art, products[2].itemName, products[2].price, 3),
     new BasketItem(products[3].art, products[3].itemName, products[3].price, 10)
 ]
 for (let newPrice of basket) {
-    newPrice.makeDiscount(10);
+    newPrice.makeDiscount(0);
 }
-function totalBasketPrice(basketArr) {
+
+function totalBasketPrice(basketArr) { //стоимость корзины
     let currenttotalPrice = 0;
     for (let i = 0; i <= basketArr.length - 1; i++) {
         let totalPrice = basketArr[i].price * basketArr[i].quantity;
         currenttotalPrice += totalPrice;
-
     }
     return currenttotalPrice;
-
 }
+
+function basketReminder() { //функция которая выводит стоимость и количество товаров
+    if (basket.length < 1) {
+        basketAlert.innerText = "корзина пуста";
+    } else {
+        basketAlert.innerText = `корзина содержит: ${basket.length} товаров на сумму ${totalBasketPrice(basket)}`
+    }
+}
+basketReminder();
 console.log(basket)
 
 console.log(`стоимость корзины v1: ${totalBasketPrice(basket)}`);
 
-// еще вариант
+// < !--ex 5-3 -->
 
-const basketV2 = {
-    item1: {
-        art: 1, itemName: `t-shirt`, desc: `description1`, price: 100, brandName: `mango`, quantity: 2
-    },
-    item2: {
-        art: 2, itemName: `t-shirt`, desc: `description2`, price: 150, brandName: `adidas`, quantity: 1
-    },
-    item3: {
-        art: 3, itemName: `t-shirt`, desc: `description3`, price: 200, brandName: `dior`, quantity: 3
-    },
-    totalBasketPrice() {
-        let p = this.item1.price * this.item1.quantity + this.item2.price * this.item2.quantity + this.item3.price * this.item3.quantity;
-        return p;
+let productsDiv = document.querySelector("#catalog");
+
+function setProductTable(insertionAdress, productsArr) { //создаю таблицу
+    let productsTable = document.createElement("table");
+    insertionAdress.appendChild(productsTable);
+    productsTable.style.border = "3px solid black";
+    productsTable.style.borderCollapse = "collapse";
+    productsTable.style.textAlign = "center";
+    productsTable.style.marginTop = "20px";
+    let n = 0;
+    while (n < productsArr.length + 1) {
+        let tRow = document.createElement("tr");
+        productsTable.appendChild(tRow);
+
+        if (n == 0) { //заполняю заголовок таблицы+стили
+            for (let i = 0; i < Object.keys(products[0]).length; i++) {
+                let tCol = document.createElement("td");
+                tRow.appendChild(tCol);
+                tCol.innerText = Object.keys(products[0])[i];
+                tCol.style.border = "1px solid black";
+                tCol.style.textTransform = "uppercase";
+            }
+        } else { //заполняю таблицу+стили
+            for (let i = 0; i < Object.keys(products[0]).length; i++) {
+                let tCol = document.createElement("td");
+                tRow.appendChild(tCol);
+                tCol.innerText = Object.values(products[n - 1])[i];
+                tCol.style.textTransform = "capitalize";
+                tCol.style.border = "1px solid black";
+
+            }
+        }
+        n++;
     }
 }
-console.log(`стоимость корзины v2: ${basketV2.totalBasketPrice()}`);
-
-
-
-
-
+setProductTable(productsDiv, products);
