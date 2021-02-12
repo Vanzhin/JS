@@ -218,19 +218,20 @@
 
 // let digit = 100;
 // let digits = [];
-// let i = 2;
+// let i = 1;
 
 // nextPrime:
-// while (i < digit) {
-//     i++;
-//     let j = 2;
-//     while (j < i) {
-//         if (i % j == 0) { continue nextPrime; }
-//         j++
+//     while (i < digit) {
+//         i++;
+//         let j = 2;
+//         while (j < i) {
+//             if (i % j == 0) {
+//                 continue nextPrime;
+//             }
+//             j++;
+//         }
+//         digits.push(i);
 //     }
-
-//     digits.push(i);
-// }
 // alert(`Простые числа от 0 до ${digit}: ${digits}`);
 
 // // < !--ex2 -->
@@ -402,157 +403,286 @@
 // < !--HomeWork 5 -- >
 // < !--ex 5-1 -->
 
-function setChessTable() { //создаю тэг таблицы
-    let chessDiv = document.querySelector(".chess");
-    let table = document.createElement("table");
-    chessDiv.appendChild(table);
-    table.style.borderCollapse = "collapse";
-    table.style.marginTop = "10px";
-    let n = 1;
-    let arrL = ["", "A", "B", "C", "D", "E", "F", "G", "H", ""]; //массивы для букв и цифр
-    let arrInt = ["", "1", "2", "3", "4", "5", "6", "7", "8", ""];
-    // строю таблицу
-    while (n <= 10) {
-        let rowBW = document.createElement("tr");
-        table.appendChild(rowBW);
-        for (let i = 1; i <= 10; i++) {
-            let td = document.createElement("td");
-            rowBW.appendChild(td);
-            td.style.width = "30px";
-            td.style.height = "30px";
-            td.style.textAlign = "center";
-            // прописываю условия для стилей и наполнения разных клеток черным
-            if (n == 10) {
-                td.innerHTML = arrL[i - 1];
-                td.style.backgroundColor = "lightgray";
-                continue;
-            }
-            if (n == 1) {
-                td.innerHTML = arrL[10 - i];
-                td.style.transform = "rotate(180deg)";
-                td.style.backgroundColor = "lightgray";
-                continue;
-            }
-            if (n % 2 == 0 && i % 2 == 1) {
-                td.style.backgroundColor = "black";
-            }
-            if (n % 2 == 1 && i % 2 == 0) {
-                td.style.backgroundColor = "black";
-            }
-            if (n > 1 && n < 10, i == 1) {
-                td.innerHTML = arrInt[10 - n];
-                td.style.backgroundColor = "lightgray";
-            }
-            if (n > 1 && n < 10, i == 10) {
-                td.innerHTML = arrInt[n - 1];
-                td.style.backgroundColor = "white";
-                td.style.transform = "rotate(180deg)";
-                td.style.backgroundColor = "lightgray";
-            }
-        }
-        n++;
-    }
-}
-setChessTable();
+// function setChessTable() { //создаю тэг таблицы
+//     let chessDiv = document.querySelector(".chess");
+//     let table = document.createElement("table");
+//     chessDiv.appendChild(table);
+//     table.style.borderCollapse = "collapse";
+//     table.style.marginTop = "10px";
+//     let n = 1;
+//     let arrL = ["", "A", "B", "C", "D", "E", "F", "G", "H", ""]; //массивы для букв и цифр
+//     let arrInt = ["", "1", "2", "3", "4", "5", "6", "7", "8", ""];
+//     // строю таблицу
+//     while (n <= 10) {
+//         let rowBW = document.createElement("tr");
+//         table.appendChild(rowBW);
+//         for (let i = 1; i <= 10; i++) {
+//             let td = document.createElement("td");
+//             rowBW.appendChild(td);
+//             td.style.width = "30px";
+//             td.style.height = "30px";
+//             td.style.textAlign = "center";
+//             // прописываю условия для стилей и наполнения разных клеток черным
+//             if (n == 10) {
+//                 td.innerHTML = arrL[i - 1];
+//                 td.style.backgroundColor = "lightgray";
+//                 continue;
+//             }
+//             if (n == 1) {
+//                 td.innerHTML = arrL[10 - i];
+//                 td.style.transform = "rotate(180deg)";
+//                 td.style.backgroundColor = "lightgray";
+//                 continue;
+//             }
+//             if (n % 2 == 0 && i % 2 == 1) {
+//                 td.style.backgroundColor = "black";
+//             }
+//             if (n % 2 == 1 && i % 2 == 0) {
+//                 td.style.backgroundColor = "black";
+//             }
+//             if (n > 1 && n < 10, i == 1) {
+//                 td.innerHTML = arrInt[10 - n];
+//                 td.style.backgroundColor = "lightgray";
+//             }
+//             if (n > 1 && n < 10, i == 10) {
+//                 td.innerHTML = arrInt[n - 1];
+//                 td.style.backgroundColor = "white";
+//                 td.style.transform = "rotate(180deg)";
+//                 td.style.backgroundColor = "lightgray";
+//             }
+//         }
+//         n++;
+//     }
+// }
+// setChessTable();
 
 // < !--ex 5-2 -->
-function Product(art, itemName, desc, price, brandName) {
+// function Product(art, itemName, desc, price, brandName) {
+//     this.art = art;
+//     this.itemName = itemName;
+//     this.desc = desc;
+//     this.price = price;
+//     this.brandName = brandName;
+// };
+// let products = [
+//     new Product(1, `t - shirt`, `goods description1`, 100, `mango`),
+//     new Product(2, `t - shirt`, `goods description2`, 120, `levis`),
+//     new Product(3, `t - shirt`, `goods description3`, 130, `GJ`),
+//     new Product(4, `t - shirt`, `goods description4`, 150, `adidas`),
+//     new Product(5, `t - shirt`, `goods description5`, 200, `nike`),
+// ];
+// console.log(products);
+// let basket = []; //создаю пустой массив корзины
+
+// function BasketItem(art, itemName, price, quantity) {
+//     this.art = art;
+//     this.itemName = itemName;
+//     this.price = price;
+//     this.quantity = quantity;
+//     this.makeDiscount = function (discount) {
+//         this.price = this.price * (100 - discount) / 100;
+//     }
+// }
+
+// let div = document.querySelector("div"); //ищется div и вставляется h2
+// let basketAlert = document.createElement("h2");
+// div.appendChild(basketAlert);
+// basketReminder();
+
+// basket = [ //создается корзина
+//     new BasketItem(products[0].art, products[0].itemName, products[0].price, 2),
+//     new BasketItem(products[2].art, products[2].itemName, products[2].price, 3),
+//     new BasketItem(products[3].art, products[3].itemName, products[3].price, 10)
+// ]
+// for (let newPrice of basket) {
+//     newPrice.makeDiscount(0);
+// }
+
+// function totalBasketPrice(basketArr) { //стоимость корзины
+//     let currenttotalPrice = 0;
+//     for (let i = 0; i <= basketArr.length - 1; i++) {
+//         let totalPrice = basketArr[i].price * basketArr[i].quantity;
+//         currenttotalPrice += totalPrice;
+//     }
+//     return currenttotalPrice;
+// }
+
+// function basketReminder() { //функция которая выводит стоимость и количество товаров
+//     if (basket.length < 1) {
+//         basketAlert.innerText = "корзина пуста";
+//     } else {
+//         basketAlert.innerText = `корзина содержит: ${basket.length} товаров на сумму ${totalBasketPrice(basket)}`
+//     }
+// }
+// basketReminder();
+// console.log(basket)
+
+// console.log(`стоимость корзины v1: ${totalBasketPrice(basket)}`);
+
+// < !--ex 5-3 -->
+
+// let productsDiv = document.querySelector("#catalog");
+
+// function setProductTable(insertionAdress, productsArr) { //создаю таблицу
+//     let productsTable = document.createElement("table");
+//     insertionAdress.appendChild(productsTable);
+//     productsTable.style.border = "3px solid black";
+//     productsTable.style.borderCollapse = "collapse";
+//     productsTable.style.textAlign = "center";
+//     productsTable.style.marginTop = "20px";
+//     let n = 0;
+//     while (n < productsArr.length + 1) {
+//         let tRow = document.createElement("tr");
+//         productsTable.appendChild(tRow);
+
+//         if (n == 0) { //заполняю заголовок таблицы+стили
+//             for (let i = 0; i < Object.keys(products[0]).length; i++) {
+//                 let tCol = document.createElement("td");
+//                 tRow.appendChild(tCol);
+//                 tCol.innerText = Object.keys(products[0])[i];
+//                 tCol.style.border = "1px solid black";
+//                 tCol.style.textTransform = "uppercase";
+//             }
+//         } else { //заполняю таблицу+стили
+//             for (let i = 0; i < Object.keys(products[0]).length; i++) {
+//                 let tCol = document.createElement("td");
+//                 tRow.appendChild(tCol);
+//                 tCol.innerText = Object.values(products[n - 1])[i];
+//                 tCol.style.textTransform = "capitalize";
+//                 tCol.style.border = "1px solid black";
+
+//             }
+//         }
+//         n++;
+//     }
+// }
+// setProductTable(productsDiv, products);
+
+// < !--HomeWork 6 -- >
+// < !--ex 6-1 -->
+
+function Product(art, itemName, desc, price, brandName, quantity) {
     this.art = art;
     this.itemName = itemName;
     this.desc = desc;
     this.price = price;
     this.brandName = brandName;
+    this.quantity = quantity;
 };
 let products = [
-    new Product(1, `t - shirt`, `goods description1`, 100, `mango`),
-    new Product(2, `t - shirt`, `goods description2`, 120, `levis`),
-    new Product(3, `t - shirt`, `goods description3`, 130, `GJ`),
-    new Product(4, `t - shirt`, `goods description4`, 150, `adidas`),
-    new Product(5, `t - shirt`, `goods description5`, 200, `nike`),
+    new Product(0, `t - shirt`, `goods description1`, 100, `mango`, 1),
+    new Product(1, `t - shirt`, `goods description2`, 120, `levis`, 1),
+    new Product(2, `t - shirt`, `goods description3`, 130, `GJ`, 1),
+    new Product(3, `t - shirt`, `goods description4`, 150, `adidas`, 1),
+    new Product(4, `t - shirt`, `goods description5`, 200, `nike`, 1),
 ];
-console.log(products);
-let basket = []; //создаю пустой массив корзины
 
-function BasketItem(art, itemName, price, quantity) {
-    this.art = art;
-    this.itemName = itemName;
-    this.price = price;
-    this.quantity = quantity;
-    this.makeDiscount = function (discount) {
-        this.price = this.price * (100 - discount) / 100;
-    }
-}
+const cart = {
 
-let div = document.querySelector("div"); //ищется div и вставляется h2
-let basketAlert = document.createElement("h2");
-div.appendChild(basketAlert);
-basketReminder();
+    init() {
+        this.setAttrButton();
+        document
+            .querySelector("#catalog")
+            .addEventListener('click', (event) => this.buttonItemHandler(event));
+    },
+    setAttrButton() { //устанавливаю аттрибут, по которому узнаю какая именно кнопка нажималась
+        let a = document.querySelectorAll("div.product > button.buy");
+        for (let i = 0; i < a.length; i++) {
+            a[i].setAttribute(`data`, i);
+        };
 
-basket = [ //создается корзина
-    new BasketItem(products[0].art, products[0].itemName, products[0].price, 2),
-    new BasketItem(products[2].art, products[2].itemName, products[2].price, 3),
-    new BasketItem(products[3].art, products[3].itemName, products[3].price, 10)
-]
-for (let newPrice of basket) {
-    newPrice.makeDiscount(0);
-}
-
-function totalBasketPrice(basketArr) { //стоимость корзины
-    let currenttotalPrice = 0;
-    for (let i = 0; i <= basketArr.length - 1; i++) {
-        let totalPrice = basketArr[i].price * basketArr[i].quantity;
-        currenttotalPrice += totalPrice;
-    }
-    return currenttotalPrice;
-}
-
-function basketReminder() { //функция которая выводит стоимость и количество товаров
-    if (basket.length < 1) {
-        basketAlert.innerText = "корзина пуста";
-    } else {
-        basketAlert.innerText = `корзина содержит: ${basket.length} товаров на сумму ${totalBasketPrice(basket)}`
-    }
-}
-basketReminder();
-console.log(basket)
-
-console.log(`стоимость корзины v1: ${totalBasketPrice(basket)}`);
-
-// < !--ex 5-3 -->
-
-let productsDiv = document.querySelector("#catalog");
-
-function setProductTable(insertionAdress, productsArr) { //создаю таблицу
-    let productsTable = document.createElement("table");
-    insertionAdress.appendChild(productsTable);
-    productsTable.style.border = "3px solid black";
-    productsTable.style.borderCollapse = "collapse";
-    productsTable.style.textAlign = "center";
-    productsTable.style.marginTop = "20px";
-    let n = 0;
-    while (n < productsArr.length + 1) {
-        let tRow = document.createElement("tr");
-        productsTable.appendChild(tRow);
-
-        if (n == 0) { //заполняю заголовок таблицы+стили
-            for (let i = 0; i < Object.keys(products[0]).length; i++) {
-                let tCol = document.createElement("td");
-                tRow.appendChild(tCol);
-                tCol.innerText = Object.keys(products[0])[i];
-                tCol.style.border = "1px solid black";
-                tCol.style.textTransform = "uppercase";
-            }
-        } else { //заполняю таблицу+стили
-            for (let i = 0; i < Object.keys(products[0]).length; i++) {
-                let tCol = document.createElement("td");
-                tRow.appendChild(tCol);
-                tCol.innerText = Object.values(products[n - 1])[i];
-                tCol.style.textTransform = "capitalize";
-                tCol.style.border = "1px solid black";
-
-            }
+    },
+    buttonItemHandler(event) { //обрабатываю клик по кнопке
+        if (event.target.tagName !== "BUTTON") {
+            return;
         }
-        n++;
-    }
+        let dataAttr = +event.target.getAttribute("data");
+        this.addToCart(dataAttr);
+
+
+
+    },
+    currentCart: [],
+
+    addToCart(dataAttr) { //добавляю товары в корзину
+        function cartItem(art, itemName, price, quantity) {
+            this.art = art;
+            this.itemName = itemName;
+            this.price = price;
+            this.quantity = quantity;
+        };
+        if (this.currentCart.length > 0) {
+            for (const prop of this.currentCart) {
+                if (prop.art == dataAttr) {
+                    ++prop.quantity;
+                    this.totalCartPrice();
+                    this.cartInfoRender();
+                    this.setCartTable(this.currentCart);
+                    return;
+                };
+
+            };
+        };
+        this.currentCart.push(new cartItem(products[dataAttr].art, products[dataAttr].itemName, products[dataAttr].price, products[dataAttr].quantity));
+        this.totalCartPrice();
+        this.cartInfoRender();
+        this.setCartTable(this.currentCart);
+
+
+    },
+
+    totalCartPrice() { //считаю полную стоимость корзины
+        let currenttotalPrice = 0;
+        for (let i = 0; i < this.currentCart.length; i++) {
+            let totalPrice = this.currentCart[i].price * this.currentCart[i].quantity;
+            currenttotalPrice += totalPrice;
+        }
+        return currenttotalPrice;
+    },
+    cartInfoRender() { //вывожу сколько в корзине товаров и цену
+        document.querySelector("#cart-price").innerText = `в корзине ${this.currentCart.length} товар(a) на сумму ${this.totalCartPrice()}`;
+    },
+    setCartTable(cartArr) { //рисую таблицу
+        this.isTableIn();
+        let cartTable = document.createElement("table");
+        document.querySelector("#catalog").appendChild(cartTable);
+        cartTable.style.border = "3px solid black";
+        cartTable.style.borderCollapse = "collapse";
+        cartTable.style.textAlign = "center";
+        cartTable.style.marginTop = "20px";
+        let n = 0;
+        while (n < cartArr.length + 1) {
+
+            let tRow = document.createElement("tr");
+            cartTable.appendChild(tRow);
+
+            if (n == 0) { //заполняю заголовок таблицы+стили
+                for (let i = 0; i < Object.keys(this.currentCart[0]).length; i++) {
+                    let tCol = document.createElement("td");
+                    tRow.appendChild(tCol);
+                    tCol.innerText = Object.keys(this.currentCart[0])[i];
+                    tCol.style.border = "1px solid black";
+                    tCol.style.textTransform = "uppercase";
+                }
+            } else { //заполняю таблицу+стили
+                for (let i = 0; i < Object.keys(this.currentCart[0]).length; i++) {
+                    let tCol = document.createElement("td");
+                    tRow.appendChild(tCol);
+                    tCol.innerText = Object.values(this.currentCart[n - 1])[i];
+                    tCol.style.textTransform = "capitalize";
+                    tCol.style.border = "1px solid black";
+                }
+            }
+            n++;
+        }
+    },
+
+    isTableIn() {
+        let t = document.querySelector("table");
+        if (t) {
+            t.remove();
+        };
+    },
 }
-setProductTable(productsDiv, products);
+
+window.onload = () => cart.init();
