@@ -763,7 +763,7 @@ const cart = {
 
 
     },
-    cartChangeEvent() {
+    cartChangeEvent() { //обрабатываю клик по кнопке в корзине 
         document
             .querySelector(".cart")
             .addEventListener('click', (event) => this.buttonCartItemHandler(event));
@@ -771,7 +771,7 @@ const cart = {
     },
 
 
-    buttonCartItemHandler(event) { //обрабатываю клик по кнопке
+    buttonCartItemHandler(event) { //записываю атрибут на кнопки в корзине
         if (event.target.tagName !== "BUTTON") {
             return;
         }
@@ -779,31 +779,21 @@ const cart = {
         let className = event.target.className;
         this.changeCartAction(dataAttr, className);
     },
-    changeCartAction(artNum, className) {
-        for (const prop of this.currentCart) {
+    changeCartAction(artNum, className) { // изменяю состав корзины
+        for (const prop of this.currentCart) { //кнопка меньше
             if (prop.art == artNum && className == "less" && prop.quantity > 0) {
                 prop.quantity--;
-                this.totalCartPrice();
-                this.cartInfoRender();
-                this.setCartTable(this.currentCart);
-
             }
-            if (prop.quantity < 1) {
+            if (prop.quantity < 1) { //если количество равно 0 удаляю элемент
                 this.currentCart.splice(this.currentCart.indexOf(prop), 1);
-                this.totalCartPrice();
-                this.cartInfoRender();
-                this.setCartTable(this.currentCart);
-            } else if (prop.art == artNum && className == "more") {
+            } else if (prop.art == artNum && className == "more") { //добавить количества
                 prop.quantity++;
-                this.totalCartPrice();
-                this.cartInfoRender();
-                this.setCartTable(this.currentCart);
-            } else if (prop.art == artNum && className == "delete") {
+            } else if (prop.art == artNum && className == "delete") { // кнопка удаляет товар целиком
                 this.currentCart.splice(this.currentCart.indexOf(prop), 1);
-                this.totalCartPrice();
-                this.cartInfoRender();
-                this.setCartTable(this.currentCart);
             };
+            this.totalCartPrice();
+            this.cartInfoRender();
+            this.setCartTable(this.currentCart);
         };
     },
 
@@ -823,7 +813,7 @@ const cart = {
         };
         document.querySelector("#cart-price").innerText = `в корзине ${this.currentCart.length} товар(a) на сумму ${this.totalCartPrice()}`;
     },
-    changeButtonsRender() {
+    changeButtonsRender() { //вставляю в html код с кнопками
         let buttonInsertion = `<button class="less">меньше</button><button class="more">больше</button><button class="delete">удалить</button>`;
         return buttonInsertion;
     },
@@ -878,7 +868,7 @@ const cart = {
         }
     },
 
-    isTableIn() {
+    isTableIn() { //проверяю есть ли таблица на странице
         let t = document.querySelector("table");
         if (t) {
             t.remove();
