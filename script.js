@@ -715,6 +715,7 @@ const cart = {
             .querySelector("#catalog")
             .addEventListener('click', (event) => this.buttonItemHandler(event));
         this.cartChangeEvent();
+
     },
     setAttrButton() { //устанавливаю аттрибут, по которому узнаю какая именно кнопка нажималась
         let a = document.querySelectorAll("div.product > button.buy");
@@ -783,8 +784,7 @@ const cart = {
         for (const prop of this.currentCart) { //кнопка меньше
             if (prop.art == artNum && className == "less" && prop.quantity > 0) {
                 prop.quantity--;
-            }
-            if (prop.quantity < 1) { //если количество равно 0 удаляю элемент
+            } else if (prop.quantity < 1) { //если количество равно 0 удаляю элемент
                 this.currentCart.splice(this.currentCart.indexOf(prop), 1);
             } else if (prop.art == artNum && className == "more") { //добавить количества
                 prop.quantity++;
@@ -856,7 +856,6 @@ const cart = {
                                 continue;
                             }
                             prop.setAttribute("cart-data", Object.values(this.currentCart[n - 1])[0]);
-
                         }
 
                     };
@@ -868,12 +867,113 @@ const cart = {
         }
     },
 
+
     isTableIn() { //проверяю есть ли таблица на странице
         let t = document.querySelector("table");
         if (t) {
             t.remove();
         };
     },
-}
 
+}
 window.onload = () => cart.init();
+
+// < !--ex 7-2 -->
+const stepsToBuy = {
+    init() {
+        this.nextButton();
+        this.activeStep();
+
+    },
+    nextButton() {
+
+        let a = document.querySelectorAll("div.step");
+        let n = 1;
+        for (const prop of a) {
+            // if (prop == a[a.length]) {
+            //     return;
+            // };
+            this.prevBut(a, prop, n);
+            prop.setAttribute("div-step-data", n);
+            if (prop == a[a.length - 1]) {
+                return;
+            };
+            let nBut = document.createElement("button");
+            nBut.innerText = "далее";
+            if (prop == a[a.length - 2]) {
+                nBut.innerText = "завершить покупку";
+            };
+            prop.appendChild(nBut);
+            nBut.setAttribute("step-data-next", n++);
+            nBut.setAttribute("class", "next");
+        }
+    },
+    prevBut(nodeList, prop, n) {
+
+        if (nodeList[0] == prop || prop == nodeList[nodeList.length - 1]) {
+            return;
+        };
+        let prevBut = document.createElement("button");
+        prevBut.innerText = "назад";
+
+        prevBut.setAttribute("step-data-prev", n);
+        prevBut.setAttribute("class", "prev");
+        prop.appendChild(prevBut);
+
+
+    },
+    activeStep() {
+        document
+            .querySelector("div.active")
+            .addEventListener('click', (e) => this.buttonActiveStepHandler(e));
+
+
+    },
+    buttonActiveStepHandler(e) {
+        if (e.target.tagName !== "BUTTON") {
+            return;
+        };
+
+        if (e.target.classList.contains("next")) {
+            let ac = document.getElementsByClassName("active")[0];
+            let dis = document.getElementsByClassName("disable");
+            let acAtr = ac.getAttribute("div-step-data");
+            for (const prop of dis) {
+
+                if (acAtr == +prop.getAttribute("div-step-data") - 1) {
+                    prop.classList.toggle("active");
+                    prop.classList.toggle("disable");
+                    ac.classList.toggle("disable");
+                    ac.classList.toggle("active");
+
+
+                };
+
+            };
+
+
+        };
+        if (e.target.classList.contains("prev")) {
+            let ac = document.getElementsByClassName("active")[0];
+            let dis = document.getElementsByClassName("disable");
+            let acAtr = ac.getAttribute("div-step-data");
+
+            for (const prop of dis) {
+
+                if (acAtr == +prop.getAttribute("div-step-data") + 1) {
+                    prop.classList.toggle("active");
+                    prop.classList.toggle("disable");
+                    ac.classList.toggle("disable");
+                    ac.classList.toggle("active");
+
+                };
+            };
+
+
+        };
+        this.activeStep();
+    },
+};
+stepsToBuy.init();
+
+// window.onload = () => stepsToBuy.init();
