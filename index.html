@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
     <script defer src="script.js"></script>
 </head>
 
-<body>
+<body style="display: flex;">
     <div class="chess">
 
     </div>
@@ -32,7 +34,24 @@
         <p class="price">130</p>
         <button class="buy" >купить</button>
     </div>
+</div>
+<div class="cart step active">
     <p id="cart-price"></p>
+
+</div>
+<div class="adress step disable">
+    <h2>Доставка</h2>
+    <input type="text" placeholder="адрес доставки">
+    <input type="date" placeholder="дата доставки">
+</div>
+<div class="comments step disable">
+    <h2>Ваш комментарий</h2>
+    <input type="text" placeholder="комментарии">
+   
+</div>
+<div class="final-info step disable">
+    <h2>Ваш заказ оформлен</h2>
+   
 </div>
 </body>
 
