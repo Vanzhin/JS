@@ -731,9 +731,6 @@ const cart = {
         }
         let dataAttr = +event.target.getAttribute("data");
         this.addToCart(dataAttr);
-
-
-
     },
     currentCart: [],
 
@@ -754,7 +751,6 @@ const cart = {
                     this.setCartTable(this.currentCart);
                     return;
                 };
-
             };
         };
         this.currentCart.push(new cartItem(products[dataAttr].art, products[dataAttr].itemName, products[dataAttr].price, products[dataAttr].quantity));
@@ -762,18 +758,17 @@ const cart = {
         this.cartInfoRender();
         this.setCartTable(this.currentCart);
 
-
     },
     cartChangeEvent() { //обрабатываю клик по кнопке в корзине 
         document
-            .querySelector(".cart")
+            .querySelector("div.cart")
             .addEventListener('click', (event) => this.buttonCartItemHandler(event));
 
     },
 
 
     buttonCartItemHandler(event) { //записываю атрибут на кнопки в корзине
-        if (event.target.tagName !== "BUTTON") {
+        if (event.target.tagName !== "BUTTON" || event.target.classList.contains("next")) {
             return;
         }
         let dataAttr = +event.target.getAttribute("cart-data");
@@ -784,7 +779,8 @@ const cart = {
         for (const prop of this.currentCart) { //кнопка меньше
             if (prop.art == artNum && className == "less" && prop.quantity > 0) {
                 prop.quantity--;
-            } else if (prop.quantity < 1) { //если количество равно 0 удаляю элемент
+            }
+            if (prop.quantity < 1) { //если количество равно 0 удаляю элемент
                 this.currentCart.splice(this.currentCart.indexOf(prop), 1);
             } else if (prop.art == artNum && className == "more") { //добавить количества
                 prop.quantity++;
@@ -794,6 +790,7 @@ const cart = {
             this.totalCartPrice();
             this.cartInfoRender();
             this.setCartTable(this.currentCart);
+
         };
     },
 
@@ -818,13 +815,13 @@ const cart = {
         return buttonInsertion;
     },
     setCartTable(cartArr) { //рисую таблицу
-
-        this.isTableIn();
+        this.setClassFirstNextButton();
+        this.deleteTable();
         if (cartArr.length == 0) {
             return;
         };
         let cartTable = document.createElement("table");
-        document.querySelector(".cart").appendChild(cartTable);
+        document.querySelector(".cart-table").appendChild(cartTable);
         cartTable.style.border = "3px solid black";
         cartTable.style.borderCollapse = "collapse";
         cartTable.style.textAlign = "center";
@@ -864,19 +861,35 @@ const cart = {
                 }
             }
             n++;
+        };
+    },
+    setClassFirstNextButton() { //устанавливаю класс для первой кнопки далее в зависимости от пустоты корзины
+        if (this.currentCart.length === 0) {
+            document.querySelector("div.cart > button").classList.toggle("disable-btn");
+        } else {
+            document.querySelector("div.cart > button").classList.remove("disable-btn");
         }
+
     },
 
 
     isTableIn() { //проверяю есть ли таблица на странице
-        let t = document.querySelector("table");
-        if (t) {
-            t.remove();
+
+        if (document.querySelector("table")) {
+            return true;
+        } else return false;
+
+
+    },
+    deleteTable() { //удаляю таблицу, если она
+        let tab = document.querySelector("table");
+        if (tab) {
+            tab.remove();
         };
     },
-
 }
-window.onload = () => cart.init();
+
+
 
 // < !--ex 7-2 -->
 const stepsToBuy = {
@@ -890,9 +903,6 @@ const stepsToBuy = {
         let a = document.querySelectorAll("div.step");
         let n = 1;
         for (const prop of a) {
-            // if (prop == a[a.length]) {
-            //     return;
-            // };
             this.prevBut(a, prop, n);
             prop.setAttribute("div-step-data", n);
             if (prop == a[a.length - 1]) {
@@ -900,12 +910,17 @@ const stepsToBuy = {
             };
             let nBut = document.createElement("button");
             nBut.innerText = "далее";
+
             if (prop == a[a.length - 2]) {
                 nBut.innerText = "завершить покупку";
             };
+
             prop.appendChild(nBut);
-            nBut.setAttribute("step-data-next", n++);
             nBut.setAttribute("class", "next");
+            if (n == 1) { //добавляю класс у первой кнопки, чтобы скрыть ее
+                document.querySelector("div.cart > button").classList.add("disable-btn");
+            };
+            nBut.setAttribute("step-data-next", n++);
         }
     },
     prevBut(nodeList, prop, n) {
@@ -924,56 +939,41 @@ const stepsToBuy = {
     },
     activeStep() {
         document
-            .querySelector("div.active")
+            .querySelector("div.cart-container")
             .addEventListener('click', (e) => this.buttonActiveStepHandler(e));
-
-
     },
     buttonActiveStepHandler(e) {
-        if (e.target.tagName !== "BUTTON") {
+        if (e.target.tagName !== "BUTTON" && (e.target.className !== "next" || e.target.className !== "prev")) {
             return;
         };
+        let ac = document.getElementsByClassName("active")[0];
+        let dis = document.getElementsByClassName("disable");
+        let acAtr = ac.getAttribute("div-step-data");
 
         if (e.target.classList.contains("next")) {
-            let ac = document.getElementsByClassName("active")[0];
-            let dis = document.getElementsByClassName("disable");
-            let acAtr = ac.getAttribute("div-step-data");
+
             for (const prop of dis) {
 
                 if (acAtr == +prop.getAttribute("div-step-data") - 1) {
+                    ac.classList.toggle("active");
                     prop.classList.toggle("active");
                     prop.classList.toggle("disable");
                     ac.classList.toggle("disable");
-                    ac.classList.toggle("active");
-
-
+                    return;
                 };
-
             };
 
-
-        };
-        if (e.target.classList.contains("prev")) {
-            let ac = document.getElementsByClassName("active")[0];
-            let dis = document.getElementsByClassName("disable");
-            let acAtr = ac.getAttribute("div-step-data");
-
+        } else if (e.target.classList.contains("prev")) {
             for (const prop of dis) {
-
                 if (acAtr == +prop.getAttribute("div-step-data") + 1) {
+                    ac.classList.toggle("active");
                     prop.classList.toggle("active");
                     prop.classList.toggle("disable");
                     ac.classList.toggle("disable");
-                    ac.classList.toggle("active");
-
+                    return;
                 };
             };
-
-
         };
-        this.activeStep();
     },
 };
-stepsToBuy.init();
-
-// window.onload = () => stepsToBuy.init();
+window.onload = () => cart.init(), stepsToBuy.init();
