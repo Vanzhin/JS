@@ -691,292 +691,292 @@
 // < !--HomeWork 7 -- >
 // < !--ex 7-1 -->
 
-// function Product(art, itemName, desc, price, brandName, quantity) {
-//     this.art = art;
-//     this.itemName = itemName;
-//     this.desc = desc;
-//     this.price = price;
-//     this.brandName = brandName;
-//     this.quantity = quantity;
-// };
-// let products = [
-//     new Product(0, `t - shirt`, `goods description1`, 100, `mango`, 1),
-//     new Product(1, `t - shirt`, `goods description2`, 120, `levis`, 1),
-//     new Product(2, `t - shirt`, `goods description3`, 130, `GJ`, 1),
-//     new Product(3, `t - shirt`, `goods description4`, 150, `adidas`, 1),
-//     new Product(4, `t - shirt`, `goods description5`, 200, `nike`, 1),
-// ];
+function Product(art, itemName, desc, price, brandName, quantity) {
+    this.art = art;
+    this.itemName = itemName;
+    this.desc = desc;
+    this.price = price;
+    this.brandName = brandName;
+    this.quantity = quantity;
+};
+let products = [
+    new Product(0, `t - shirt`, `goods description1`, 100, `mango`, 1),
+    new Product(1, `t - shirt`, `goods description2`, 120, `levis`, 1),
+    new Product(2, `t - shirt`, `goods description3`, 130, `GJ`, 1),
+    new Product(3, `t - shirt`, `goods description4`, 150, `adidas`, 1),
+    new Product(4, `t - shirt`, `goods description5`, 200, `nike`, 1),
+];
 
-// const cart = {
+const cart = {
 
-//     init() {
-//         this.setAttrButton();
-//         document
-//             .querySelector("#catalog")
-//             .addEventListener('click', (event) => this.buttonItemHandler(event));
-//         this.cartChangeEvent();
+    init() {
+        this.setAttrButton();
+        document
+            .querySelector("#catalog")
+            .addEventListener('click', (event) => this.buttonItemHandler(event));
+        this.cartChangeEvent();
 
-//     },
-//     setAttrButton() { //устанавливаю аттрибут, по которому узнаю какая именно кнопка нажималась
-//         let a = document.querySelectorAll("div.product > button.buy");
-//         for (let i = 0; i < a.length; i++) {
-//             a[i].setAttribute(`data`, i);
-//         };
+    },
+    setAttrButton() { //устанавливаю аттрибут, по которому узнаю какая именно кнопка нажималась
+        let a = document.querySelectorAll("div.product > button.buy");
+        for (let i = 0; i < a.length; i++) {
+            a[i].setAttribute(`data`, i);
+        };
 
-//     },
+    },
 
-//     buttonItemHandler(event) { //обрабатываю клик по кнопке
-//         if (event.target.tagName !== "BUTTON") {
-//             return;
-//         }
-//         let dataAttr = +event.target.getAttribute("data");
-//         this.addToCart(dataAttr);
-//     },
-//     currentCart: [],
+    buttonItemHandler(event) { //обрабатываю клик по кнопке
+        if (event.target.tagName !== "BUTTON") {
+            return;
+        }
+        let dataAttr = +event.target.getAttribute("data");
+        this.addToCart(dataAttr);
+    },
+    currentCart: [],
 
-//     addToCart(dataAttr) { //добавляю товары в корзину
-//         function cartItem(art, itemName, price, quantity, change) {
-//             this.art = art;
-//             this.itemName = itemName;
-//             this.price = price;
-//             this.quantity = quantity;
-//             this.change = change;
-//         };
-//         if (this.currentCart.length > 0) {
-//             for (const prop of this.currentCart) {
-//                 if (prop.art == dataAttr) {
-//                     ++prop.quantity;
-//                     this.totalCartPrice();
-//                     this.cartInfoRender();
-//                     this.setCartTable(this.currentCart);
-//                     return;
-//                 };
-//             };
-//         };
-//         this.currentCart.push(new cartItem(products[dataAttr].art, products[dataAttr].itemName, products[dataAttr].price, products[dataAttr].quantity));
-//         this.totalCartPrice();
-//         this.cartInfoRender();
-//         this.setCartTable(this.currentCart);
+    addToCart(dataAttr) { //добавляю товары в корзину
+        function cartItem(art, itemName, price, quantity, change) {
+            this.art = art;
+            this.itemName = itemName;
+            this.price = price;
+            this.quantity = quantity;
+            this.change = change;
+        };
+        if (this.currentCart.length > 0) {
+            for (const prop of this.currentCart) {
+                if (prop.art == dataAttr) {
+                    ++prop.quantity;
+                    this.totalCartPrice();
+                    this.cartInfoRender();
+                    this.setCartTable(this.currentCart);
+                    return;
+                };
+            };
+        };
+        this.currentCart.push(new cartItem(products[dataAttr].art, products[dataAttr].itemName, products[dataAttr].price, products[dataAttr].quantity));
+        this.totalCartPrice();
+        this.cartInfoRender();
+        this.setCartTable(this.currentCart);
 
-//     },
-//     cartChangeEvent() { //обрабатываю клик по кнопке в корзине 
-//         document
-//             .querySelector("div.cart")
-//             .addEventListener('click', (event) => this.buttonCartItemHandler(event));
+    },
+    cartChangeEvent() { //обрабатываю клик по кнопке в корзине 
+        document
+            .querySelector("div.cart")
+            .addEventListener('click', (event) => this.buttonCartItemHandler(event));
 
-//     },
-
-
-//     buttonCartItemHandler(event) { //записываю атрибут на кнопки в корзине
-//         if (event.target.tagName !== "BUTTON" || event.target.classList.contains("next")) {
-//             return;
-//         }
-//         let dataAttr = +event.target.getAttribute("cart-data");
-//         let className = event.target.className;
-//         this.changeCartAction(dataAttr, className);
-//     },
-//     changeCartAction(artNum, className) { // изменяю состав корзины
-//         for (const prop of this.currentCart) { //кнопка меньше
-//             if (prop.art == artNum && className == "less" && prop.quantity > 0) {
-//                 prop.quantity--;
-//             }
-//             if (prop.quantity < 1) { //если количество равно 0 удаляю элемент
-//                 this.currentCart.splice(this.currentCart.indexOf(prop), 1);
-//             } else if (prop.art == artNum && className == "more") { //добавить количества
-//                 prop.quantity++;
-//             } else if (prop.art == artNum && className == "delete") { // кнопка удаляет товар целиком
-//                 this.currentCart.splice(this.currentCart.indexOf(prop), 1);
-//             };
-//             this.totalCartPrice();
-//             this.cartInfoRender();
-//             this.setCartTable(this.currentCart);
-
-//         };
-//     },
-
-//     totalCartPrice() { //считаю полную стоимость корзины
-//         let currenttotalPrice = 0;
-
-//         for (let i = 0; i < this.currentCart.length; i++) {
-//             let totalPrice = this.currentCart[i].price * this.currentCart[i].quantity;
-//             currenttotalPrice += totalPrice;
-//         }
-//         return currenttotalPrice;
-//     },
-//     cartInfoRender() { //вывожу сколько в корзине товаров и цену
-//         if (this.currentCart.length <= 0) {
-//             document.querySelector("#cart-price").innerText = `в корзине пусто`;
-//             return;
-//         };
-//         document.querySelector("#cart-price").innerText = `в корзине ${this.currentCart.length} товар(a) на сумму ${this.totalCartPrice()}`;
-//     },
-//     changeButtonsRender() { //вставляю в html код с кнопками
-//         let buttonInsertion = `<button class="less">меньше</button><button class="more">больше</button><button class="delete">удалить</button>`;
-//         return buttonInsertion;
-//     },
-//     setCartTable(cartArr) { //рисую таблицу
-//         this.setClassFirstNextButton();
-//         this.deleteTable();
-//         if (cartArr.length == 0) {
-//             return;
-//         };
-//         let cartTable = document.createElement("table");
-//         document.querySelector(".cart-table").appendChild(cartTable);
-//         cartTable.style.border = "3px solid black";
-//         cartTable.style.borderCollapse = "collapse";
-//         cartTable.style.textAlign = "center";
-//         cartTable.style.marginTop = "20px";
-//         let n = 0;
-//         while (n < cartArr.length + 1) {
-
-//             let tRow = document.createElement("tr");
-//             cartTable.appendChild(tRow);
-
-//             if (n == 0) { //заполняю заголовок таблицы+стили
-//                 for (let i = 0; i < Object.keys(this.currentCart[0]).length; i++) {
-//                     let tCol = document.createElement("td");
-//                     tRow.appendChild(tCol);
-//                     tCol.innerText = Object.keys(this.currentCart[0])[i];
-//                     tCol.style.border = "1px solid black";
-//                     tCol.style.textTransform = "uppercase";
-//                 }
-//             } else { //заполняю таблицу+стили
-//                 for (let i = 0; i < Object.keys(this.currentCart[0]).length; i++) {
-//                     let tCol = document.createElement("td");
-//                     tRow.appendChild(tCol);
-//                     tCol.innerText = Object.values(this.currentCart[n - 1])[i];
-//                     if (Object.keys(this.currentCart[n - 1])[i] == "change") {
-//                         tCol.innerHTML = this.changeButtonsRender();
-//                         let a = document.querySelectorAll("table>tr>td>button");
-//                         for (const prop of a) {
-//                             if (prop.hasAttribute('cart-data')) {
-//                                 continue;
-//                             }
-//                             prop.setAttribute("cart-data", Object.values(this.currentCart[n - 1])[0]);
-//                         }
-
-//                     };
-//                     tCol.style.textTransform = "capitalize";
-//                     tCol.style.border = "1px solid black";
-//                 }
-//             }
-//             n++;
-//         };
-//     },
-//     setClassFirstNextButton() { //устанавливаю класс для первой кнопки далее в зависимости от пустоты корзины
-//         if (this.currentCart.length === 0) {
-//             document.querySelector("div.cart > button").classList.toggle("disable-btn");
-//         } else {
-//             document.querySelector("div.cart > button").classList.remove("disable-btn");
-//         }
-
-//     },
+    },
 
 
-//     isTableIn() { //проверяю есть ли таблица на странице
+    buttonCartItemHandler(event) { //записываю атрибут на кнопки в корзине
+        if (event.target.tagName !== "BUTTON" || event.target.classList.contains("next")) {
+            return;
+        }
+        let dataAttr = +event.target.getAttribute("cart-data");
+        let className = event.target.className;
+        this.changeCartAction(dataAttr, className);
+    },
+    changeCartAction(artNum, className) { // изменяю состав корзины
+        for (const prop of this.currentCart) { //кнопка меньше
+            if (prop.art == artNum && className == "less" && prop.quantity > 0) {
+                prop.quantity--;
+            }
+            if (prop.quantity < 1) { //если количество равно 0 удаляю элемент
+                this.currentCart.splice(this.currentCart.indexOf(prop), 1);
+            } else if (prop.art == artNum && className == "more") { //добавить количества
+                prop.quantity++;
+            } else if (prop.art == artNum && className == "delete") { // кнопка удаляет товар целиком
+                this.currentCart.splice(this.currentCart.indexOf(prop), 1);
+            };
+            this.totalCartPrice();
+            this.cartInfoRender();
+            this.setCartTable(this.currentCart);
 
-//         if (document.querySelector("table")) {
-//             return true;
-//         } else return false;
+        };
+    },
+
+    totalCartPrice() { //считаю полную стоимость корзины
+        let currenttotalPrice = 0;
+
+        for (let i = 0; i < this.currentCart.length; i++) {
+            let totalPrice = this.currentCart[i].price * this.currentCart[i].quantity;
+            currenttotalPrice += totalPrice;
+        }
+        return currenttotalPrice;
+    },
+    cartInfoRender() { //вывожу сколько в корзине товаров и цену
+        if (this.currentCart.length <= 0) {
+            document.querySelector("#cart-price").innerText = `в корзине пусто`;
+            return;
+        };
+        document.querySelector("#cart-price").innerText = `в корзине ${this.currentCart.length} товар(a) на сумму ${this.totalCartPrice()}`;
+    },
+    changeButtonsRender() { //вставляю в html код с кнопками
+        let buttonInsertion = `<button class="less">меньше</button><button class="more">больше</button><button class="delete">удалить</button>`;
+        return buttonInsertion;
+    },
+    setCartTable(cartArr) { //рисую таблицу
+        this.setClassFirstNextButton();
+        this.deleteTable();
+        if (cartArr.length == 0) {
+            return;
+        };
+        let cartTable = document.createElement("table");
+        document.querySelector(".cart-table").appendChild(cartTable);
+        cartTable.style.border = "3px solid black";
+        cartTable.style.borderCollapse = "collapse";
+        cartTable.style.textAlign = "center";
+        cartTable.style.marginTop = "20px";
+        let n = 0;
+        while (n < cartArr.length + 1) {
+
+            let tRow = document.createElement("tr");
+            cartTable.appendChild(tRow);
+
+            if (n == 0) { //заполняю заголовок таблицы+стили
+                for (let i = 0; i < Object.keys(this.currentCart[0]).length; i++) {
+                    let tCol = document.createElement("td");
+                    tRow.appendChild(tCol);
+                    tCol.innerText = Object.keys(this.currentCart[0])[i];
+                    tCol.style.border = "1px solid black";
+                    tCol.style.textTransform = "uppercase";
+                }
+            } else { //заполняю таблицу+стили
+                for (let i = 0; i < Object.keys(this.currentCart[0]).length; i++) {
+                    let tCol = document.createElement("td");
+                    tRow.appendChild(tCol);
+                    tCol.innerText = Object.values(this.currentCart[n - 1])[i];
+                    if (Object.keys(this.currentCart[n - 1])[i] == "change") {
+                        tCol.innerHTML = this.changeButtonsRender();
+                        let a = document.querySelectorAll("table>tr>td>button");
+                        for (const prop of a) {
+                            if (prop.hasAttribute('cart-data')) {
+                                continue;
+                            }
+                            prop.setAttribute("cart-data", Object.values(this.currentCart[n - 1])[0]);
+                        }
+
+                    };
+                    tCol.style.textTransform = "capitalize";
+                    tCol.style.border = "1px solid black";
+                }
+            }
+            n++;
+        };
+    },
+    setClassFirstNextButton() { //устанавливаю класс для первой кнопки далее в зависимости от пустоты корзины
+        if (this.currentCart.length === 0) {
+            document.querySelector("div.cart > button").classList.toggle("disable-btn");
+        } else {
+            document.querySelector("div.cart > button").classList.remove("disable-btn");
+        }
+
+    },
 
 
-//     },
-//     deleteTable() { //удаляю таблицу, если она
-//         let tab = document.querySelector("table");
-//         if (tab) {
-//             tab.remove();
-//         };
-//     },
-// }
+    isTableIn() { //проверяю есть ли таблица на странице
+
+        if (document.querySelector("table")) {
+            return true;
+        } else return false;
+
+
+    },
+    deleteTable() { //удаляю таблицу, если она
+        let tab = document.querySelector("table");
+        if (tab) {
+            tab.remove();
+        };
+    },
+}
 
 
 
-// // < !--ex 7-2 -->
-// const stepsToBuy = {
-//     init() {
-//         this.nextButton();
-//         this.activeStep();
+// < !--ex 7-2 -->
+const stepsToBuy = {
+    init() {
+        this.nextButton();
+        this.activeStep();
 
-//     },
-//     nextButton() {
+    },
+    nextButton() {
 
-//         let a = document.querySelectorAll("div.step");
-//         let n = 1;
-//         for (const prop of a) {
-//             this.prevBut(a, prop, n);
-//             prop.setAttribute("div-step-data", n);
-//             if (prop == a[a.length - 1]) {
-//                 return;
-//             };
-//             let nBut = document.createElement("button");
-//             nBut.innerText = "далее";
+        let a = document.querySelectorAll("div.step");
+        let n = 1;
+        for (const prop of a) {
+            this.prevBut(a, prop, n);
+            prop.setAttribute("div-step-data", n);
+            if (prop == a[a.length - 1]) {
+                return;
+            };
+            let nBut = document.createElement("button");
+            nBut.innerText = "далее";
 
-//             if (prop == a[a.length - 2]) {
-//                 nBut.innerText = "завершить покупку";
-//             };
+            if (prop == a[a.length - 2]) {
+                nBut.innerText = "завершить покупку";
+            };
 
-//             prop.appendChild(nBut);
-//             nBut.setAttribute("class", "next");
-//             if (n == 1) { //добавляю класс у первой кнопки, чтобы скрыть ее
-//                 document.querySelector("div.cart > button").classList.add("disable-btn");
-//             };
-//             nBut.setAttribute("step-data-next", n++);
-//         }
-//     },
-//     prevBut(nodeList, prop, n) {
+            prop.appendChild(nBut);
+            nBut.setAttribute("class", "next");
+            if (n == 1) { //добавляю класс у первой кнопки, чтобы скрыть ее
+                document.querySelector("div.cart > button").classList.add("disable-btn");
+            };
+            nBut.setAttribute("step-data-next", n++);
+        }
+    },
+    prevBut(nodeList, prop, n) {
 
-//         if (nodeList[0] == prop || prop == nodeList[nodeList.length - 1]) {
-//             return;
-//         };
-//         let prevBut = document.createElement("button");
-//         prevBut.innerText = "назад";
+        if (nodeList[0] == prop || prop == nodeList[nodeList.length - 1]) {
+            return;
+        };
+        let prevBut = document.createElement("button");
+        prevBut.innerText = "назад";
 
-//         prevBut.setAttribute("step-data-prev", n);
-//         prevBut.setAttribute("class", "prev");
-//         prop.appendChild(prevBut);
+        prevBut.setAttribute("step-data-prev", n);
+        prevBut.setAttribute("class", "prev");
+        prop.appendChild(prevBut);
 
 
-//     },
-//     activeStep() {
-//         document
-//             .querySelector("div.cart-container")
-//             .addEventListener('click', (e) => this.buttonActiveStepHandler(e));
-//     },
-//     buttonActiveStepHandler(e) {
-//         if (e.target.tagName !== "BUTTON" && (e.target.className !== "next" || e.target.className !== "prev")) {
-//             return;
-//         };
-//         let ac = document.getElementsByClassName("active")[0];
-//         let dis = document.getElementsByClassName("disable");
-//         let acAtr = ac.getAttribute("div-step-data");
+    },
+    activeStep() {
+        document
+            .querySelector("div.cart-container")
+            .addEventListener('click', (e) => this.buttonActiveStepHandler(e));
+    },
+    buttonActiveStepHandler(e) {
+        if (e.target.tagName !== "BUTTON" && (e.target.className !== "next" || e.target.className !== "prev")) {
+            return;
+        };
+        let ac = document.getElementsByClassName("active")[0];
+        let dis = document.getElementsByClassName("disable");
+        let acAtr = ac.getAttribute("div-step-data");
 
-//         if (e.target.classList.contains("next")) {
+        if (e.target.classList.contains("next")) {
 
-//             for (const prop of dis) {
+            for (const prop of dis) {
 
-//                 if (acAtr == +prop.getAttribute("div-step-data") - 1) {
-//                     ac.classList.toggle("active");
-//                     prop.classList.toggle("active");
-//                     prop.classList.toggle("disable");
-//                     ac.classList.toggle("disable");
-//                     return;
-//                 };
-//             };
+                if (acAtr == +prop.getAttribute("div-step-data") - 1) {
+                    ac.classList.toggle("active");
+                    prop.classList.toggle("active");
+                    prop.classList.toggle("disable");
+                    ac.classList.toggle("disable");
+                    return;
+                };
+            };
 
-//         } else if (e.target.classList.contains("prev")) {
-//             for (const prop of dis) {
-//                 if (acAtr == +prop.getAttribute("div-step-data") + 1) {
-//                     ac.classList.toggle("active");
-//                     prop.classList.toggle("active");
-//                     prop.classList.toggle("disable");
-//                     ac.classList.toggle("disable");
-//                     return;
-//                 };
-//             };
-//         };
-//     },
-// };
-// window.onload = () => cart.init(), stepsToBuy.init();
+        } else if (e.target.classList.contains("prev")) {
+            for (const prop of dis) {
+                if (acAtr == +prop.getAttribute("div-step-data") + 1) {
+                    ac.classList.toggle("active");
+                    prop.classList.toggle("active");
+                    prop.classList.toggle("disable");
+                    ac.classList.toggle("disable");
+                    return;
+                };
+            };
+        };
+    },
+};
+window.onload = () => cart.init(), stepsToBuy.init();
 
 
 
