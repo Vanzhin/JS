@@ -1,4 +1,4 @@
-//"use strict";
+"use strict";
 //<!-- задание 1 -->
 //let Tc = 20;
 //let Tf = ((9 / 5) * Tc + 32);
@@ -692,6 +692,7 @@
 // < !--ex 7-1 -->
 
 function Product(art, itemName, desc, price, brandName, quantity) {
+    console.log(this);
     this.art = art;
     this.itemName = itemName;
     this.desc = desc;
@@ -803,12 +804,21 @@ const cart = {
         }
         return currenttotalPrice;
     },
+    totalCartItemQuantity() { //подсчет общего количества товаров
+        let currenttotalQuantity = 0;
+
+        for (let i = 0; i < this.currentCart.length; i++) {
+            let totalQuantity = this.currentCart[i].quantity;
+            currenttotalQuantity += totalQuantity;
+        }
+        return currenttotalQuantity;
+    },
     cartInfoRender() { //вывожу сколько в корзине товаров и цену
         if (this.currentCart.length <= 0) {
             document.querySelector("#cart-price").innerText = `в корзине пусто`;
             return;
         };
-        document.querySelector("#cart-price").innerText = `в корзине ${this.currentCart.length} товар(a) на сумму ${this.totalCartPrice()}`;
+        document.querySelector("#cart-price").innerText = `в корзине ${this.totalCartItemQuantity()} товар(a) на сумму ${this.totalCartPrice()}`;
     },
     changeButtonsRender() { //вставляю в html код с кнопками
         let buttonInsertion = `<button class="less">меньше</button><button class="more">больше</button><button class="delete">удалить</button>`;
